@@ -1,4 +1,6 @@
 #!/bin/sh
+#TODO: control fan instead of freq! (see last firmware)
+exit;
 TMIN=58				#Below this temp, the frequency will be increased
 TMAX=62				#Above this temp, the frequency will be decreased
 REFRESH_TIMER=1200  #The temperature is checked every 1200s
