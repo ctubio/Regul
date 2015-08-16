@@ -21,7 +21,7 @@ while true; do
     else
       maxtemp=$(( $temp1 > $temp2 ? $temp1 : $temp2 ));
       echo -n "TEMP: $maxtemp ($temp1:$temp2), FAN: $fan1 ($pwm%) at " && date;
-      if [ $FAN_FORCE -gt 0 ]; then
+      if [ $FAN_FORCE -gt $FAN_MIN ]; then
         FAN_MOD=$FAN_FORCE;
       else
         FAN_MOD=0;
