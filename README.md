@@ -20,5 +20,5 @@ you can run anytime:
 root@antMiner:~# tail -f nohup.out
 ```
 #### Very special thanks to:
-- https://github.com/ckolivas/cgminer
 - https://github.com/kmitz/Regul
+- https://github.com/ckolivas/cgminer
