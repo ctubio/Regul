@@ -39,10 +39,11 @@ when neightbour is out of home:
 root@antMiner:~# killall cgminer-fan.sh
 ```
 ### Forced fan speed:
-when neightbour is still of home:
+when neightbour is still out of home:
 ```
 root@antMiner:~# ./cgminer-fan.sh 100
 ```
+this will change the fan speed to the value of the first argument and exit (will not keep controling nothing, well only that the value passed is greater than `$FAN_MIN`, because we don't want to see fire today [to really avoid fire keep `$FAN_MIN` over a minimum of 30, always]).
 #### Alternative controller:
 see [this post](https://jomcflyatwork.wordpress.com/2015/07/13/shell-script-for-antminer-s5-temperature-regulation/) from  [kmitz/Regul](https://github.com/kmitz/Regul) if you preffer to control the temperature tweaking the Frequency rather than the Fan Speed.
 #### Very special thanks to:
