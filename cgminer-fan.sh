@@ -16,7 +16,7 @@ while true; do
     if [ -z $maxtemp ]; then
       echo "ZOMBIE at " && date;
     else
-      echo "TEMP: $maxtemp ($temp1:$temp2), FAN: $fan1 ($pwm%)";
+      echo -n "TEMP: $maxtemp ($temp1:$temp2), FAN: $fan1 ($pwm%) at " && date;
       FAN_MOD=0;
       if [ $maxtemp -gt $CELSIUS_DIE ]; then
         FAN_MOD=-1;
