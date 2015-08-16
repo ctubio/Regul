@@ -37,7 +37,7 @@ the machine restores the original filesystem on every reboot, so you can't store
 ```
 root@antMiner:~# nohub ./cgminer-fan.sh &
 ```
-this will start controlling the fan every `$DELAY` seconds, and restart your cgminer to apply the new fan speed every time that the temperature goes over or below a threshold.
+this will start controlling the temperature and the fan speed every `$DELAY` seconds. It will edit the configuration file and restart your cgminer to apply the new fan speed every time that the temperature goes over or below a threshold.
 ### View Log:
 you can run anytime:
 ```
