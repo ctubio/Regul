@@ -22,9 +22,9 @@ while true; do
       maxtemp=$(( $temp1 > $temp2 ? $temp1 : $temp2 ));
       echo -n "TEMP: $maxtemp ($temp1:$temp2), FAN: $fan1 ($pwm%) at " && date;
       FAN_MOD=0;
-      if [ $FAN_FORCE -gt $FAN_MIN ]; then
+      if [ "$FAN_FORCE" -eq "$FAN_FORCE" ] 2>/dev/null && [ $FAN_FORCE -gt $FAN_MIN ]; then
         FAN_MOD=$FAN_FORCE;
-      elif [ $FAN_FORCE -gt 0 ]; then
+      elif [ "$FAN_FORCE" -eq "$FAN_FORCE" ] 2>/dev/null && [ $FAN_FORCE -gt 0 ]; then
         echo "SET $FAN_FORCE% ignored because is less than $FAN_MIN%." && exit;
       else
         if [ $maxtemp -gt $CELSIUS_DIE ]; then
