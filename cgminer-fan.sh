@@ -1,41 +1,35 @@
 #!/bin/sh
-#TODO: control fan instead of freq! (see last firmware)
-exit;
-TMIN=58				#Below this temp, the frequency will be increased
-TMAX=62				#Above this temp, the frequency will be decreased
-REFRESH_TIMER=1200  #The temperature is checked every 1200s
-FREQ_STEP=4 #Each step is 6.25MHz, so with FREQ_STEP=4 that's a 6.25*4=25MHz frequency increase of decrease
-while true
-do
-	date
-	echo TEMP REGULATION IS ACTIVE
-	temp1=$(cgminer-api stats | grep temp1] | awk '{print $3}') 
-	temp2=$(cgminer-api stats | grep temp2] | awk '{print $3}')
-	maxtemp=$(( $temp1 > $temp2 ? $temp1 : $temp2 ))
-	echo Temperature: $maxtemp
-	freq=$(cgminer-api stats | grep frequency] | awk '{print $3}')
-	echo Frequence: $freq
-	if [ $maxtemp -gt $TMAX ]
-	then 
-		echo "Aaahhhhhh!! I'm burning!! $maxtemp Celsius degrees";
-		newFreq=$(cat freqList | grep -A "$FREQ_STEP" "$freq" | tail -n 1)
-		echo New Frequency: $newFreq	
-	        sed -i "/bitmain-freq/c\"bitmain-freq\" : \"$newFreq\"," /config/cgminer.conf;    
-		echo Restarting...
-		sleep 1s
-		/etc/init.d/cgminer.sh restart
-	elif [ $maxtemp -lt $TMIN ]
-	then
-		echo "Increase the power...!! Only $maxtemp Celsius degrees"
-		newFreq=$(cat freqList | grep -B "$FREQ_STEP" "$freq" | head -n 1)
-		echo New Frequency: $newFreq
-		sed -i "/bitmain-freq/c\"bitmain-freq\" : \"$newFreq\"," /config/cgminer.conf;
-		echo Restarting
-		sleep 1s
-		/etc/init.d/cgminer.sh restart
-	else
-		echo "Temp OK: $maxtemp Celsius degrees";
-	fi
-
-	sleep $REFRESH_TIMER
-done
+FAN_MIN=33;
+FAN_LOW=42;
+FAN_MAX=100;
+CELSIUS_LOW=69;
+CELSIUS_MAX=75;
+CELSIUS_DIE=78;
+DELAY=1200;
+while true; do
+  if [ $(ps | grep "cgminer " | grep -v 'grep cgminer' | wc -l) -gt 0 ]; then
+    temp1=$(cgminer-api stats | grep temp1] | awk '{print $3}');
+    temp2=$(cgminer-api stats | grep temp2] | awk '{print $3}');
+    fan1=$(cgminer-api stats | grep fan1] | awk '{print $3}');
+    pwm=$(grep bitmain-fan-pwm /config/cgminer.conf | awk '{print $3}' | sed -e 's/[[:punct:]]//g');
+    maxtemp=$(( $temp1 > $temp2 ? $temp1 : $temp2 ));
+    echo "TEMP: $maxtemp ($temp1:$temp2), FAN: $fan1 ($pwm%)";
+    FAN_MOD=0;
+    if [ $maxtemp -gt $DIE_CELSIUS ]; then
+      FAN_MOD=-1;
+    elif [ $maxtemp -gt $CELSIUS_MAX ]; then
+      test $pwm -ne $FAN_MAX && FAN_MOD=$FAN_MAX;
+    elif [ $maxtemp -gt $CELSIUS_LOW ]; then
+      test $pwm -ne $FAN_LOW && FAN_MOD=$FAN_LOW;
+    else
+      test $pwm -ne $FAN_MIN && FAN_MOD=$FAN_MIN;
+    fi;
+    if [ $FAN_MOD -lt 0 ]; then
+      echo -n "DIE at " && date && /etc/init.d/cgminer.sh stop;
+    elif [ $FAN_MOD -gt 0 ]; then
+      sed -i "/bitmain-fan-pwm/c\"bitmain-fan-pwm\" : \"$FAN_MOD\"," /config/cgminer.conf && \
+      echo -n "SET $FAN_MOD% at " && date && /etc/init.d/cgminer.sh restart;
+    fi;
+  fi;
+  sleep $DELAY;
+done;
