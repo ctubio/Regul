@@ -35,7 +35,7 @@ CELSIUS_DIE=78;
 ### Usage:
 the machine restores the original filesystem on every reboot, so you can't store files. But whenever you feel hot, you can ssh into it, copy the file, and execute it:
 ```
-root@antMiner:~# nohub ./cgminer-fan.sh &
+root@antMiner:~# nohup ./cgminer-fan.sh &
 ```
 this will start controlling the temperature and the fan speed every `$DELAY` seconds. It will edit the configuration file and restart your cgminer to apply the new fan speed every time that the temperature goes over or below a threshold.
 ### View Log:
