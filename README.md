@@ -59,3 +59,7 @@ see [this post](https://jomcflyatwork.wordpress.com/2015/07/13/shell-script-for-
 #### Very special thanks to:
 - https://github.com/kmitz/Regul
 - https://github.com/ckolivas/cgminer
+
+
+###### Donations
+nope. but you can donate to your favorite developer today! (or tomorrow!)
