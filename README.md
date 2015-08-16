@@ -21,7 +21,7 @@ You may also want to remove the lovely beeper feature (it beeps when getting hot
 ### Optimization:
 the idea is to avoid useless fan revolutions/noise/angry_ugly_fat_neighbour, but also make the miner be restarted as less times as possible (for me it is 0 times during winter, but twiece a day in summer, when the temperature here changes between day and night [happens to be at arround 8am were the fan decides to start running at `$FAN_LOW` and later again at 9pm when it goes back to `$FAN_MIN`]).
 
-You must never put the machine at `$CELSIUS_MAX` (out of tests in a normal run), but if in case, the script will run the fan at $FAN_MAX speed. If the temperature even raises to `$CELSIUS_DIE`, it will stop the miner, and the miner will be started again by your system when the temperature is again below safe ranges.
+You must never put the machine at `$CELSIUS_MAX` (out of tests in a normal run), but if in case, the script will run the fan at `$FAN_MAX` speed. If the temperature even raises to `$CELSIUS_DIE`, it will stop the miner, and the miner will be started again by your system when the temperature is again below safe ranges.
 
 You may want to start with somewhat similar to:
 ```bash
