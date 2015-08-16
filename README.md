@@ -8,7 +8,7 @@ sh script to control fan PWM based on temperature levels.
 ### Usage:
 set your own desired values for the variables at the very top of the script if the current ones doesn't match your environment; the idea is to make the miner be restarted as less times as possible; then:
 ```
-root@antMiner:/etc/init.d# screen -S fan ./cgminer-fan.sh
+root@antMiner:~# screen -S fan ./cgminer-fan.sh
 ```
 #### Very special thanks to:
 - https://github.com/ckolivas/cgminer
