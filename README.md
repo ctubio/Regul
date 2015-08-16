@@ -34,12 +34,12 @@ you can run anytime:
 root@antMiner:~# tail -f nohup.out
 ```
 ### Kill it:
-when neightbour is out of home:
+when neighbour is out of home:
 ```
 root@antMiner:~# killall cgminer-fan.sh
 ```
 ### Forced fan speed:
-when neightbour is still out of home:
+when neighbour is still out of home:
 ```
 root@antMiner:~# ./cgminer-fan.sh 100
 ```
