@@ -10,9 +10,19 @@ set your own desired values for the variables at the very top of the script if t
 
 You may also want to remove the lovely beeper feature (it beeps when getting hot but does nothing while cooling), if so just delete the lines that writes to gpio20.
 ### Good Configuration:
-the idea is to avoid useless fan revolutions/noise/angry_ugly_fat_neighbour, but also make the miner be restarted as less times as possible (for me it is 0 times during winter, but twiece a day in summer, when the temperature here changes between day and night [happens to be at arround 8am were the fan decides to start running at 42% and later again at 9pm when it goes back to 33%]).
+the idea is to avoid useless fan revolutions/noise/angry_ugly_fat_neighbour, but also make the miner be restarted as less times as possible (for me it is 0 times during winter, but twiece a day in summer, when the temperature here changes between day and night [happens to be at arround 8am were the fan decides to start running at `$FAN_LOW` and later again at 9pm when it goes back to `$FAN_MIN`]).
 
-I never saw the machine at 75ºC (out of tests in a normal run), but if in case, the script will run the fan at maximum speed. If the temperature even raises to 78ºC, it will stop the miner, and the miner will be started again by your system when the temperature is again below safe ranges.
+You must never put the machine at `$CELSIUS_MAX` (out of tests in a normal run), but if in case, the script will run the fan at $FAN_MAX speed. If the temperature even raises to `$CELSIUS_DIE`, it will stop the miner, and the miner will be started again by your system when the temperature is again below safe ranges.
+
+You may want to start with somewhat similar to:
+```bash
+FAN_MIN=50;
+FAN_LOW=75;
+FAN_MAX=100;
+CELSIUS_LOW=60;
+CELSIUS_MAX=70;
+CELSIUS_DIE=78;
+```
 ### Usage:
 this hardware restores the original filesystem on every reboot, so you can't store files. But whenever you feel hot, you can ssh into it, copy the file, and execute it:
 ```
