@@ -28,10 +28,12 @@ while true; do
         test $pwm -ne $FAN_MIN && FAN_MOD=$FAN_MIN;
       fi;
       if [ $FAN_MOD -lt 0 ]; then
-        echo -n "DIE at " && date && /etc/init.d/cgminer.sh stop;
+        echo -n "DIE at " && date && \
+        /etc/init.d/cgminer.sh stop > /dev/null 2>&1;
       elif [ $FAN_MOD -gt 0 ]; then
-        sed -i "/bitmain-fan-pwm/c\"bitmain-fan-pwm\" : \"$FAN_MOD\"," /config/cgminer.conf && \
-        echo -n "SET $FAN_MOD% at " && date && /etc/init.d/cgminer.sh restart;
+        sed -i "/bitmain-fan-pwm/c\"bitmain-fan-pwm\" : \"$FAN_MOD\"," /config/cgminer.conf  && \
+        echo -n "SET $FAN_MOD% at " && date && \
+        /etc/init.d/cgminer.sh restart > /dev/null 2>&1;
       fi;
     fi;
   fi;
