@@ -18,7 +18,6 @@ while true; do
     else
       echo "TEMP: $maxtemp ($temp1:$temp2), FAN: $fan1 ($pwm%)";
       FAN_MOD=0;
-      echo $CELSIUS_DIE;exit;
       if [ $maxtemp -gt $CELSIUS_DIE ]; then
         FAN_MOD=-1;
       elif [ $maxtemp -gt $CELSIUS_MAX ]; then
