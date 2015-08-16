@@ -51,7 +51,7 @@ while true; do
         echo 1 > /sys/class/gpio/gpio20/value && \
         sleep 1 && \
         echo 0 > /sys/class/gpio/gpio20/value;
-        test $FAN_FORCE -gt 0 && exit;
+        test "$FAN_FORCE" -eq "$FAN_FORCE" 2>/dev/null && test $FAN_FORCE -gt 0 && exit;
       fi;
     fi;
   else
