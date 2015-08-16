@@ -23,6 +23,8 @@ you can run anytime:
 ```
 root@antMiner:~# tail -f nohup.out
 ```
+### Alternative controller:
+see [this post](https://jomcflyatwork.wordpress.com/2015/07/13/shell-script-for-antminer-s5-temperature-regulation/) from  [kmitz/Regul](https://github.com/kmitz/Regul) if you preffer to control the temperature tweaking the Frequency rather than the Fan Speed.
 #### Very special thanks to:
 - https://github.com/kmitz/Regul
 - https://github.com/ckolivas/cgminer
