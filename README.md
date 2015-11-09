@@ -1,8 +1,8 @@
 # cgminer-fan.sh
 sh script to control fan PWM based on temperature levels. 
 ### Requirements
-- Hardware: BITMAIN Antminer S5
-- Software: Firmware* >= SD-S5-20150715-fan_ctrl.tar.gz
+- Hardware: BITMAIN Antminer S5 or S7
+- Software: S7 built-in Firmware or S5 Firmware* >= SD-S5-20150715-fan_ctrl.tar.gz
 - Config: must have defined somewhere in /config/cgminer.conf but not at the end of the file (because of the last comma):
 ```
 {
