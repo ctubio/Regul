@@ -3,12 +3,12 @@ FAN_FORCE=0;
 if [ -n $1 ]; then
   FAN_FORCE=$1;
 fi;
-FAN_MIN=33;
-FAN_LOW=42;
+FAN_MIN=50;
+FAN_LOW=70;
 FAN_MAX=100;
-CELSIUS_LOW=69;
-CELSIUS_MAX=75;
-CELSIUS_DIE=78;
+CELSIUS_LOW=49;
+CELSIUS_MAX=55;
+CELSIUS_DIE=65;
 DELAY=121;
 while true; do
   if [ $(ps | grep "cgminer " | grep -v 'grep cgminer' | wc -l) -gt 0 ]; then
